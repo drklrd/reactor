@@ -15,17 +15,22 @@ var APP = require('./components/APP');
 var Audience = require('./components/Audience');
 var Speaker = require('./components/Speaker');
 var Board = require('./components/Board');
+var notFound = require('./components/notFound');
+
 
 var routes = (
 	<Router history={appHistory}>
 		<Route path="/" component={APP}>
+			<IndexRoute component={Audience}/>.
+			<Route path="audience" component={Audience}>
+			</Route>
+			<Route path="speaker" component={Speaker}>
+			</Route>
+			<Route path="board" component={Board}>
+			</Route>
+			<Route path="*" component={notFound}/>
 		</Route>
-		<Route path="audience" component={Audience}>
-		</Route>
-		<Route path="speaker" component={Speaker}>
-		</Route>
-		<Route path="board" component={Board}>
-		</Route>
+		
 	</Router>
 
 

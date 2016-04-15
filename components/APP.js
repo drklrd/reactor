@@ -44,8 +44,18 @@ var APP = React.createClass({
 	render() {
 		return (
 
-			<div className={this.state.status==='connected' ? 'online' : 'offline'}>
-				<Header title={this.state.title} status={this.state.status}  />
+			<div >
+				<div className={this.state.status==='connected' ? 'online' : 'offline'}>
+
+					<Header title={this.state.title} status={this.state.status}  />
+					
+
+				</div>
+				<div>
+				         {React.cloneElement(this.props.children, {data: this.state})}
+				</div>
+
+				
 				
 			</div>
 

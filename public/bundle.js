@@ -73,14 +73,21 @@
 	var Audience = __webpack_require__(278);
 	var Speaker = __webpack_require__(279);
 	var Board = __webpack_require__(280);
+	var notFound = __webpack_require__(281);
 
 	var routes = _react2.default.createElement(
 		_reactRouter.Router,
 		{ history: appHistory },
-		_react2.default.createElement(_reactRouter.Route, { path: '/', component: APP }),
-		_react2.default.createElement(_reactRouter.Route, { path: 'audience', component: Audience }),
-		_react2.default.createElement(_reactRouter.Route, { path: 'speaker', component: Speaker }),
-		_react2.default.createElement(_reactRouter.Route, { path: 'board', component: Board })
+		_react2.default.createElement(
+			_reactRouter.Route,
+			{ path: '/', component: APP },
+			_react2.default.createElement(_reactRouter.IndexRoute, { component: Audience }),
+			'.',
+			_react2.default.createElement(_reactRouter.Route, { path: 'audience', component: Audience }),
+			_react2.default.createElement(_reactRouter.Route, { path: 'speaker', component: Speaker }),
+			_react2.default.createElement(_reactRouter.Route, { path: 'board', component: Board }),
+			_react2.default.createElement(_reactRouter.Route, { path: '*', component: notFound })
+		)
 	);
 	console.log(routes);
 
@@ -25551,8 +25558,17 @@
 		render: function render() {
 			return React.createElement(
 				'div',
-				{ className: this.state.status === 'connected' ? 'online' : 'offline' },
-				React.createElement(Header, { title: this.state.title, status: this.state.status })
+				null,
+				React.createElement(
+					'div',
+					{ className: this.state.status === 'connected' ? 'online' : 'offline' },
+					React.createElement(Header, { title: this.state.title, status: this.state.status })
+				),
+				React.createElement(
+					'div',
+					null,
+					React.cloneElement(this.props.children, { data: this.state })
+				)
 			);
 		}
 	});
@@ -33047,7 +33063,8 @@
 			return React.createElement(
 				'h1',
 				null,
-				'Audience'
+				'Audience ',
+				this.props.data.title
 			);
 		}
 	});
@@ -33068,7 +33085,8 @@
 			return React.createElement(
 				'h1',
 				null,
-				'Speaker'
+				'Speaker',
+				this.props.data.status
 			);
 		}
 	});
@@ -33095,6 +33113,27 @@
 	});
 
 	module.exports = Board;
+
+/***/ },
+/* 281 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var notFound = React.createClass({
+		displayName: 'notFound',
+		render: function render() {
+			return React.createElement(
+				'h1',
+				null,
+				'NOT FOUND !!!'
+			);
+		}
+	});
+
+	module.exports = notFound;
 
 /***/ }
 /******/ ]);
